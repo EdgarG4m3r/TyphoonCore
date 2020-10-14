@@ -29,11 +29,6 @@ var (
 )
 
 func initConfig() (err error) {
-	fav, err := ioutil.ReadFile("./favicon.png")
-	if err == nil {
-		favicon = "data:image/png;base64," + base64.StdEncoding.EncodeToString(fav)
-	}
-
 	file, err := ioutil.ReadFile("./config.json")
 	if err != nil {
 		panic(err)
