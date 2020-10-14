@@ -212,9 +212,9 @@ func (packet *PacketLoginStart) Handle(player *Player) {
 	})
 
 	player.WritePacket(&PacketPlayerPositionLook{
-		player.core.world.Spawn.X,
-		player.core.world.Spawn.Y,
-		player.core.world.Spawn.Z,
+		25.50,
+		16.00,
+		26.50,
 		0,
 		0,
 		0xFF,
