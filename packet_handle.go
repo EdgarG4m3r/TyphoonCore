@@ -755,6 +755,16 @@ type PacketPlayChunkData struct {
 	BlockEntities []nbt.Compound
 }
 
+type PacketPlayChunkData16 struct {
+	X             int32
+	Z             int32
+	GroundUp      bool
+	ServerLightning bool
+	Sections      []*ChunkSection
+	Biomes        *[]byte
+	BlockEntities []nbt.Compound
+}
+
 func (packet *PacketPlayChunkData) Read(player *Player, length int) (err error) {
 	return
 }
