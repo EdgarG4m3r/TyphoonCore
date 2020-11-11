@@ -112,7 +112,6 @@ func (m *Map) SendSpawnChunks(p *Player) {
 			packet := &PacketPlayChunkData{
 				c.ChunkX,
 				c.ChunkZ,
-				m.Dimension,
 				true,
 				false,
 				c.Sections[:],
