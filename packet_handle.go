@@ -222,7 +222,13 @@ func (packet *PacketLoginStart) Handle(player *Player) {
 	})
 
 	player.core.world.SendSpawnChunks(player)
-
+	
+	if player.protocol >=V1_16_2 {
+		player.core.world.SendSpawnChunks16(player)
+	} else {
+		player.core.world.SendSpawnChunks(player)
+	}
+	
 	if player.protocol >= V1_13 {
 		player.WritePacket(&PacketPlayDeclareCommands{
 			player.core.compiledCommands,
