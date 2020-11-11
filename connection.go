@@ -255,6 +255,9 @@ const (
 	V1_15_2 Protocol = 578
 	V1_16   Protocol = 735
 	V1_16_1 Protocol = 736
+	V1_16_2 Protocol = 751
+	V1_16_3 Protocol = 753
+	V1_16_4 Protocol = 754
 )
 
 var (
@@ -279,6 +282,9 @@ var (
 		V1_15_2,
 		V1_16,
 		V1_16_1,
+		V1_16_2,
+		V1_16_3,
+		V1_16_4
 	}
 )
 
