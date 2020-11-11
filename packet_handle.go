@@ -2,7 +2,6 @@ package typhoon
 
 import (
 	"compress/zlib"
-	"encoding/binary"
 	"fmt"
 	"log"
 
