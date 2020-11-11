@@ -1,7 +1,6 @@
 package typhoon
 
 import (
-	"encoding/base64"
 	"encoding/json"
 	"io/ioutil"
 )
