@@ -109,10 +109,9 @@ func (m *Map) SendSpawnChunks16(p *Player) {
 		for z := -4; z < 4; z++ {
 			c := m.GetChunk(int32(x)+sx, int32(z)+sz)
 			biomes := make([]byte, 256)
-			packet := &PacketPlayChunkData{
+			packet := &PacketPlayChunkData16{
 				c.ChunkX,
 				c.ChunkZ,
-				true,
 				true,
 				false,
 				c.Sections[:],
