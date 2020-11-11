@@ -101,6 +101,30 @@ func (section *ChunkSection) SetBlock(x, y, z int, typ string) {
 	section.Blocks[y<<8|z<<4|x] = section.Palette.GetId(typ)
 }
 
+func (m *Map) SendSpawnChunks16(p *Player) {
+	sx := int32(m.Spawn.X) / 16
+	sz := int32(m.Spawn.Z) / 16
+
+	for x := -4; x < 4; x++ {
+		for z := -4; z < 4; z++ {
+			c := m.GetChunk(int32(x)+sx, int32(z)+sz)
+			biomes := make([]byte, 256)
+			packet := &PacketPlayChunkData{
+				c.ChunkX,
+				c.ChunkZ,
+				true,
+				true,
+				false,
+				c.Sections[:],
+				&biomes,
+				make([]nbt.Compound, 0),
+			}
+			p.WritePacket(packet)
+		}
+	}
+}
+
+
 func (m *Map) SendSpawnChunks(p *Player) {
 	sx := int32(m.Spawn.X) / 16
 	sz := int32(m.Spawn.Z) / 16
