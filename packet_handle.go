@@ -223,12 +223,6 @@ func (packet *PacketLoginStart) Handle(player *Player) {
 
 	player.core.world.SendSpawnChunks(player)
 	
-	if player.protocol >=V1_16_2 {
-		player.core.world.SendSpawnChunks16(player)
-	} else {
-		player.core.world.SendSpawnChunks(player)
-	}
-	
 	if player.protocol >= V1_13 {
 		player.WritePacket(&PacketPlayDeclareCommands{
 			player.core.compiledCommands,
@@ -748,16 +742,6 @@ type PacketPlayChunkData struct {
 	X             int32
 	Z             int32
 	Dimension     Dimension
-	GroundUp      bool
-	ServerLightning bool
-	Sections      []*ChunkSection
-	Biomes        *[]byte
-	BlockEntities []nbt.Compound
-}
-
-type PacketPlayChunkData16 struct {
-	X             int32
-	Z             int32
 	GroundUp      bool
 	ServerLightning bool
 	Sections      []*ChunkSection
