@@ -741,7 +741,6 @@ func (packet *PacketPlayKeepAlive) Id() (int, Protocol) {
 type PacketPlayChunkData struct {
 	X             int32
 	Z             int32
-	Dimension     Dimension
 	GroundUp      bool
 	ServerLightning bool
 	Sections      []*ChunkSection
