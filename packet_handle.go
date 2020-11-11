@@ -221,13 +221,6 @@ func (packet *PacketLoginStart) Handle(player *Player) {
 	})
 
 	player.core.world.SendSpawnChunks(player)
-	
-	if player.protocol >= V1_13 {
-		player.WritePacket(&PacketPlayDeclareCommands{
-			player.core.compiledCommands,
-			0,
-		})
-	}
 
 	player.core.CallEvent(&PlayerJoinEvent{
 		player,
@@ -562,39 +555,6 @@ func (packet *PacketPlayServerDifficulty) Write(player *Player) (err error) {
 func (packet *PacketPlayServerDifficulty) Handle(player *Player) {}
 func (packet *PacketPlayServerDifficulty) Id() (int, Protocol) {
 	return 0x0D, V1_10
-}
-
-type PacketPlayDeclareCommands struct {
-	Nodes     []commandNode
-	RootIndex int
-}
-
-func (packet *PacketPlayDeclareCommands) Read(player *Player, length int) (err error) {
-	return
-}
-func (packet *PacketPlayDeclareCommands) Write(player *Player) (err error) {
-	err = player.WriteVarInt(len(packet.Nodes))
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	for _, n := range packet.Nodes {
-		err = (&n).writeTo(player)
-		if err != nil {
-			log.Print(err)
-			return
-		}
-	}
-	err = player.WriteVarInt(packet.RootIndex)
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	return
-}
-func (packet *PacketPlayDeclareCommands) Handle(player *Player) {}
-func (packet *PacketPlayDeclareCommands) Id() (int, Protocol) {
-	return 0x11, V1_13
 }
 
 type PacketPlayDisconnect struct {
