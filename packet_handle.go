@@ -867,10 +867,6 @@ func (packet *PacketPlayChunkData) WriteV1_13(player *Player) (err error) {
 				lights[i] = 0xFF
 			}
 			player.WriteByteArray(lights)
-			if packet.Dimension == OVERWORLD {
-				// Overworld sky light
-				player.WriteByteArray(lights)
-			}
 		}
 	}
 
@@ -998,10 +994,6 @@ func (packet *PacketPlayChunkData) WriteV1_9(player *Player) (err error) {
 			lights[i] = 0xFF
 		}
 		player.WriteByteArray(lights)
-		if packet.Dimension == OVERWORLD {
-			// Overworld sky light
-			player.WriteByteArray(lights)
-		}
 	}
 
 	// Add biomes
@@ -1073,23 +1065,6 @@ func (packet *PacketPlayChunkData) WriteV1_8(player *Player) (err error) {
 			lights[i] = 0xFF
 		}
 		player.WriteByteArray(lights)
-	}
-
-	// Write sky lights
-	if packet.Dimension == OVERWORLD {
-		for i, _ := range packet.Sections {
-			// Check chunk used
-			if (bitmask & (1 << i)) == 0 {
-				continue
-			}
-
-			// Write sky lights
-			lights := make([]byte, 16*16*16/2)
-			for i := range lights {
-				lights[i] = 0xFF
-			}
-			player.WriteByteArray(lights)
-		}
 	}
 
 	// Write biomes
@@ -1172,23 +1147,6 @@ func (packet *PacketPlayChunkData) WriteV1_7(player *Player) (err error) {
 			lights[i] = 0xFF
 		}
 		player.WriteByteArray(lights)
-	}
-
-	// Write sky lights
-	if packet.Dimension == OVERWORLD {
-		for i, _ := range packet.Sections {
-			// Check chunk used
-			if (bitmask & (1 << i)) == 0 {
-				continue
-			}
-
-			// Write sky lights
-			lights := make([]byte, 16*16*16/2)
-			for i := range lights {
-				lights[i] = 0xFF
-			}
-			player.WriteByteArray(lights)
-		}
 	}
 
 	// Write biomes
